@@ -11,15 +11,23 @@ AC_DEFUN([mc_UNIT_TESTS],[
 
     AC_ARG_ENABLE(
         [tests],
-        AS_HELP_STRING([--enable-tests], [Enable unit tests (see http://check.sourceforge.net/)])
+        AS_HELP_STRING([--enable-tests], [Enable unit tests (see http://check.sourceforge.net/)]),
+        ,
+        [enable_tests=no]  dnl Coerce empty value to "no", for easier coding.
     )
+
+    tests_msg=$enable_tests
 
     if test x$enable_tests != xno; then
         PKG_CHECK_MODULES(
             CHECK,
             [check >= 0.9.8],
             [have_check=yes],
-            [AC_MSG_WARN(['Check' utility not found. Check your environment])])
+            [
+                AC_MSG_WARN(['Check' utility not found. Check your environment])
+                tests_msg="no ('Check' utility not found)"
+                enable_tests=no  dnl Prevents makefiles under 'tests' folder from being generated later on (not mandatory, but nice to have)
+            ])
         AC_SUBST(CHECK_CFLAGS)
         AC_SUBST(CHECK_LIBS)
     fi

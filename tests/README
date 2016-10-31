@@ -1,0 +1,22 @@
+Overview
+--------
+
+This tree contains unit tests.
+
+To enable these tests, run 'configure' with '--enable-tests'. You need to
+have the "Check" unit testing framework[1] installed.[2] You should then
+see "Unit tests: yes" in configure's summary message.
+
+To compile the tests, run 'make check'.
+
+
+Tips and tricks
+---------------
+
+* To be able to step with the debugger into test code, see [3]. E.g., do:
+
+    $ export CK_FORK=no
+
+[1]: http://check.sourceforge.net/
+[2]: Your package manager likely has it.
+[3]: http://stackoverflow.com/questions/1649814/debugging-unit-test-in-c-using-check

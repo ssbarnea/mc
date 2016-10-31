@@ -649,6 +649,7 @@ Configuration:
   Source code location:       ${srcdir}
   Compiler:                   ${CC}
   Compiler flags:             ${CFLAGS}
+  Unit tests:                 ${tests_msg}
   File system:                ${vfs_type}
                               ${vfs_flags}
   Screen library:             ${screen_msg}
