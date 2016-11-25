@@ -482,7 +482,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     case MSG_NOTIFY:
         if (sender == WIDGET (ignore_dirs_cbox) && parm == (int) MSG_FOCUS)
         {
-            gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
+            gboolean disable = !ignore_dirs_cbox->state;
 
             widget_disable (WIDGET (in_ignore), disable);
 
@@ -496,8 +496,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             return MSG_HANDLED;
 
         /* check filename regexp */
-        if (!(file_pattern_cbox->state & C_BOOL)
-            && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
+        if (!file_pattern_cbox->state && (in_name->buffer[0] != '\0')
+            && !find_check_regexp (in_name->buffer))
         {
             /* Don't stop the dialog */
             widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
@@ -507,7 +507,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
 
         /* check content regexp */
-        if ((content_regexp_cbox->state & C_BOOL) && (in_with->buffer[0] != '\0')
+        if (content_regexp_cbox->state && (in_with->buffer[0] != '\0')
             && !find_check_regexp (in_with->buffer))
         {
             /* Don't stop the dialog */
@@ -793,18 +793,18 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             char *s;
 
 #ifdef HAVE_CHARSET
-            options.file_all_charsets = file_all_charsets_cbox->state & C_BOOL;
-            options.content_all_charsets = content_all_charsets_cbox->state & C_BOOL;
+            options.file_all_charsets = file_all_charsets_cbox->state;
+            options.content_all_charsets = content_all_charsets_cbox->state;
 #endif
-            options.content_case_sens = content_case_sens_cbox->state & C_BOOL;
-            options.content_regexp = content_regexp_cbox->state & C_BOOL;
-            options.content_first_hit = content_first_hit_cbox->state & C_BOOL;
-            options.content_whole_words = content_whole_words_cbox->state & C_BOOL;
-            options.find_recurs = recursively_cbox->state & C_BOOL;
-            options.file_pattern = file_pattern_cbox->state & C_BOOL;
-            options.file_case_sens = file_case_sens_cbox->state & C_BOOL;
-            options.skip_hidden = skip_hidden_cbox->state & C_BOOL;
-            options.ignore_dirs_enable = ignore_dirs_cbox->state & C_BOOL;
+            options.content_case_sens = content_case_sens_cbox->state;
+            options.content_regexp = content_regexp_cbox->state;
+            options.content_first_hit = content_first_hit_cbox->state;
+            options.content_whole_words = content_whole_words_cbox->state;
+            options.find_recurs = recursively_cbox->state;
+            options.file_pattern = file_pattern_cbox->state;
+            options.file_case_sens = file_case_sens_cbox->state;
+            options.skip_hidden = skip_hidden_cbox->state;
+            options.ignore_dirs_enable = ignore_dirs_cbox->state;
             g_free (options.ignore_dirs);
             options.ignore_dirs = g_strdup (in_ignore->buffer);
 
