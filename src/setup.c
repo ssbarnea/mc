@@ -1071,7 +1071,6 @@ void
 load_setup (void)
 {
     const char *profile;
-    size_t i;
 
 #ifdef HAVE_CHARSET
     char *buffer;
